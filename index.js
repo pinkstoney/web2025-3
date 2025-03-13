@@ -29,9 +29,20 @@ try
   
     const result = JSON.stringify(parsedData, null, 2);
   
-    if (options.output) fs.writeFileSync(options.output, result);
+    const filteredData = parsedData.filter(item => item.parent === 'BS3_BanksLiab');
+
+    const formattedData = filteredData.map(item => `${item.txten}:${item.value}`);
+
+    if (options.output) 
+    {
+        const outputResult = formattedData.join('\n');
+        fs.writeFileSync(options.output, outputResult);
+    }
   
-    if (options.display) console.log(result);
+    if (options.display) 
+    {
+        formattedData.forEach(item => console.log(item));
+    }
   
 }
 catch (error) 
