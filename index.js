@@ -1,6 +1,5 @@
 const { program } = require('commander');
 const fs = require('fs');
-const path = require('path');
 
 program
     .option('-i, --input <path>', 'шлях до вхідного файлу')
@@ -26,8 +25,6 @@ try
 {
     const data = fs.readFileSync(options.input, 'utf8');
     const parsedData = JSON.parse(data);
-  
-    const result = JSON.stringify(parsedData, null, 2);
   
     const filteredData = parsedData.filter(item => item.parent === 'BS3_BanksLiab');
 
